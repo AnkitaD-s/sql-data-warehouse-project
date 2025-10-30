@@ -1,3 +1,9 @@
+/*
+Script Purpose:
+    This script creates tables in the 'silver' schema, dropping existing tables 
+    if they already exist.
+*/
+
 -- Table: silver.crm_cust_info
 -- DROP TABLE IF EXISTS silver.crm_cust_info;
 CREATE TABLE IF NOT EXISTS silver.crm_cust_info
