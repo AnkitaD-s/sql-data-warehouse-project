@@ -220,6 +220,17 @@ GET DIAGNOSTICS rows_loaded = ROW_COUNT;
         rows_loaded, EXTRACT(EPOCH FROM end_time - start_time);
 END $$;
 --------------------------------------------------------------------------------
+-- End total timer and load duration
+DO $$
+DECLARE
+    start_time TIMESTAMP;
+    end_time TIMESTAMP := clock_timestamp();
+BEGIN
+    SELECT * INTO start_time FROM temp_timer;
+    RAISE NOTICE 'Total load time: % seconds.', EXTRACT(EPOCH FROM end_time - start_time);
+    DROP TABLE temp_timer;
+END $$;
+
 
 $BODY$;
 ALTER PROCEDURE silver.load_silver()
@@ -227,5 +238,22 @@ ALTER PROCEDURE silver.load_silver()
 
 --------------------------------------------------------------------------------
 OUTPUT:
+NOTICE:  Loading all tables in silver layer
+NOTICE:  Loading silver.crm_cust_info...
+NOTICE:  Loaded 18485 rows into silver.crm_cust_info in 0.143281 seconds.
+NOTICE:  Loading silver.crm_prd_info...
+NOTICE:  Loaded 397 rows into silver.crm_prd_info in 0.009743 seconds.
+NOTICE:  Loading silver.crm_sales_details...
+NOTICE:  Loaded 60398 rows into silver.crm_sales_details in 1.362339 seconds.
+NOTICE:  Loading silver.erp_cust_az12...
+NOTICE:  Loaded 18484 rows into silver.erp_cust_az12 in 0.076044 seconds.
+NOTICE:  Loading silver.erp_loc_a101...
+NOTICE:  Loaded 18484 rows into silver.erp_loc_a101 in 0.298018 seconds.
+NOTICE:  Loading silver.erp_px_cat_g1v2...
+NOTICE:  Loaded 37 rows into silver.erp_px_cat_g1v2 in 0.002130 seconds.
+NOTICE:  Total load time: 1.899508 seconds.
+CALL
+
+Query returned successfully in 1 secs 975 msec.
 
 
