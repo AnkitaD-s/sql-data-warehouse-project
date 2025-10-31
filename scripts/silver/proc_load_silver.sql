@@ -237,6 +237,7 @@ ALTER PROCEDURE silver.load_silver()
     OWNER TO postgres;
 
 --------------------------------------------------------------------------------
+/*
 OUTPUT:
 NOTICE:  Loading all tables in silver layer
 NOTICE:  Loading silver.crm_cust_info...
@@ -255,5 +256,6 @@ NOTICE:  Total load time: 1.899508 seconds.
 CALL
 
 Query returned successfully in 1 secs 975 msec.
+*/
 
 
